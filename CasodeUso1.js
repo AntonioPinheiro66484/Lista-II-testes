@@ -3,8 +3,8 @@ const readlineSync = require('readline-sync');
 // Função para gerar informações aleatórias da disciplina
 function gerarInformacoesDisciplina() {
   const professores = ['Prof. A', 'Prof. B', 'Prof. C'];
-  const horarios = ['Segunda às 10h', 'Terça às 14h', 'Quarta às 18h'];
-  const locais = ['Sala 101', 'Sala 203', 'Laboratório 1'];
+  const horarios = ['Segunda as 10h', 'Terça as 14h', 'Quarta as 18h'];
+  const locais = ['Sala 101', 'Sala 203', 'Laboratorio 1'];
   const codigosTurma = ['T123', 'T456', 'T789'];
 
   const indiceAleatorio = (array) => Math.floor(Math.random() * array.length);
@@ -37,7 +37,7 @@ function encontrarDisciplinaPorNome(nome) {
 function imprimirInformacoesDisciplina(disciplina) {
   const informacoes = gerarInformacoesDisciplina();
   console.log(`Nome do Professor: ${informacoes.professor}`);
-  console.log(`Horário: ${informacoes.horario}`);
+  console.log(`Horario: ${informacoes.horario}`);
   console.log(`Local da Aula: ${informacoes.local}`);
   console.log(`Código da Turma: ${informacoes.codigoTurma}`);
 }
@@ -46,10 +46,10 @@ function main() {
   while (true) {
     console.log('\n1. Se inscrever em uma disciplina');
     console.log('2. Revisar lista de disciplinas inscritas');
-    console.log('3. Confirmar Inscrições');
+    console.log('3. Confirmar Inscricoes');
     console.log('4. Sair');
 
-    const escolha = readlineSync.question('Escolha uma opção: ');
+    const escolha = readlineSync.question('Escolha uma opcao: ');
 
     switch (escolha) {
       case '1':
@@ -78,16 +78,16 @@ function main() {
                 nome: disciplina.nome,
                 horario: gerarInformacoesDisciplina().horario,
               });
-              console.log('Inscrição finalizada e dados registrados com sucesso no Sistema de Faturamento.');
+              console.log('Inscricao finalizada e dados registrados com sucesso no Sistema de Faturamento.');
               imprimirInformacoesDisciplina(disciplina);            
             } else {
-              console.log('Conflito de horário! Não é possível se inscrever.');
+              console.log('Conflito de horario! Nao e possivel se inscrever.');
             }
           } else {
-            console.log('Vagas esgotadas ou créditos insuficientes para se inscrever.');
+            console.log('Vagas esgotadas ou creditos insuficientes para se inscrever.');
           }
         } else {
-          console.log('Disciplina não encontrada.');
+          console.log('Disciplina nao encontrada.');
         }
         break;
         case '2':
@@ -101,7 +101,7 @@ function main() {
               console.log(`- ${disciplina.nome} (${disciplina.horario})`);
             });
           } else {
-            console.log('Aluno não encontrado.');
+            console.log('Aluno nao encontrado.');
           }
           break;
   
@@ -120,11 +120,11 @@ function main() {
   
         case '4':
           // Sair
-          console.log('Saindo do sistema. Até logo!');
+          console.log('Saindo do sistema. Ate logo!');
           process.exit();
   
         default:
-          console.log('Opção inválida. Tente novamente.');
+          console.log('Opção invalida. Tente novamente.');
       }
     }
   }

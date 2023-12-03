@@ -55,8 +55,6 @@ const disciplina3 = new Disciplina("Química", "Prof. Santos", "Terça-feira", "
 
 // Criar um aluno de exemplo
 const aluno1 = new Aluno("João", 20);
-const aluno2 = new Aluno("Igor", 20);
-const aluno3 = new Aluno("Vinicius", 20);
 
 // Tentar se inscrever em disciplinas
 disciplina1.inscreverAluno(aluno1);
@@ -64,17 +62,3 @@ disciplina2.inscreverAluno(aluno1);
 disciplina3.inscreverAluno(aluno1);
 
 console.log(aluno1.disciplinas);
-
-// Tentar se inscrever em disciplinas
-disciplina1.inscreverAluno(aluno2);
-disciplina2.inscreverAluno(aluno2);
-disciplina3.inscreverAluno(aluno2);
-
-console.log(aluno2.disciplinas);
-
-// Tentar se inscrever em disciplinas
-disciplina1.inscreverAluno(aluno3);
-disciplina2.inscreverAluno(aluno3);
-disciplina3.inscreverAluno(aluno3);
-
-console.log(aluno3.disciplinas);

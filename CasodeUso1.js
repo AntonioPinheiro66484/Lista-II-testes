@@ -22,6 +22,7 @@ class Disciplina {
         aluno.disciplinas.push(this);
         return true;
       } else {
+        //RN00 Choque de horarios
         console.log("Erro: Conflito de horário.");
         return false;
       }
@@ -49,10 +50,11 @@ class Aluno {
 }
 
 // Criar algumas disciplinas de exemplo
-const disciplina1 = new Disciplina("Matemática", "Prof. Silva", "Segunda-feira", "Sala 101", 4, 5);
-const disciplina2 = new Disciplina("Física", "Prof. Souza", "Segunda-feira", "Sala 102", 4, 3);
-const disciplina3 = new Disciplina("Química", "Prof. Santos", "Terça-feira", "Sala 201", 4, 0);
-
+const disciplina1 = new Disciplina("Matemática", "Prof. Tokio", "Segunda-feira", "Sala 101", 4, 20);
+const disciplina2 = new Disciplina("Física", "Prof. Souza", "Terça-feira", "Sala 102", 4, 20);
+const disciplina3 = new Disciplina("Algebra linear", "Prof. Furia", "Quarta-feira", "Sala 201", 4, 20);
+const disciplina4 = new Disciplina("Logica de progracao e algoritmo", "Prof. Eliane", "Quinta-feira", "Sala 201", 4, 20);
+const disciplina5 = new Disciplina("Qualidade de teste e software", "Prof. Vendramel", "Sexta-feira", "Sala 201", 4, 20);
 // Criar um aluno de exemplo
 const aluno1 = new Aluno("João", 20);
 
@@ -60,5 +62,7 @@ const aluno1 = new Aluno("João", 20);
 disciplina1.inscreverAluno(aluno1);
 disciplina2.inscreverAluno(aluno1);
 disciplina3.inscreverAluno(aluno1);
+disciplina4.inscreverAluno(aluno1);
+disciplina5.inscreverAluno(aluno1);
 
 console.log(aluno1.disciplinas);

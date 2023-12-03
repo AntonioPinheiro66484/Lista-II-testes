@@ -1,26 +1,14 @@
 const readlineSync = require('readline-sync');
 
-// Função para gerar informações aleatórias da disciplina
-function gerarInformacoesDisciplina() {
-  const professores = ['Prof. A', 'Prof. B', 'Prof. C'];
-  const horarios = ['Segunda as 10h', 'Terça as 14h', 'Quarta as 18h'];
-  const locais = ['Sala 101', 'Sala 203', 'Laboratorio 1'];
-  const codigosTurma = ['T123', 'T456', 'T789'];
-
-  const indiceAleatorio = (array) => Math.floor(Math.random() * array.length);
-
-  return {
-    professor: professores[indiceAleatorio(professores)],
-    horario: horarios[indiceAleatorio(horarios)],
-    local: locais[indiceAleatorio(locais)],
-    codigoTurma: codigosTurma[indiceAleatorio(codigosTurma)],
-  };
-}
-
 const disciplinasDisponiveis = [
-  { nome: 'Matematica', vagas: 5, creditos: 4, alunos: [] },
-  { nome: 'Historia', vagas: 3, creditos: 4, alunos: [] },
-  { nome: 'Fisica', vagas: 4, creditos: 4, alunos: [] },
+  { nome: 'Matematica', vagas: 3, creditos: 4, professor: 'Vendramel', horario: 'Segunda às 10h', local: 'Sala 101', codigoTurma: 'T123', alunos: [], listaEspera: [] },
+  { nome: 'Historia', vagas: 3, creditos: 4, professor: 'Alberto', horario: 'Terça às 14h', local: 'Sala 202', codigoTurma: 'T47', alunos: [], listaEspera: [] },
+  { nome: 'Fisica', vagas: 2, creditos: 4, professor: 'Dexter', horario: 'Quarta às 18h', local: 'Laboratório 4', codigoTurma: 'T389', alunos: [], listaEspera: [] },
+  { nome: 'Portugues', vagas:3 , creditos: 4, professor: 'Maria', horario: 'Quinta às 14h', local: 'Sala 223', codigoTurma: 'T456', alunos: [], listaEspera: [] },
+  { nome: 'Artes', vagas: 4, creditos: 4, professor: 'Elzebio', horario: 'Sexta às 18h', local: 'Laboratório 45', codigoTurma: 'T774', alunos: [], listaEspera: [] },
+  { nome: 'Design', vagas: 3, creditos: 4, professor: 'Ivo', horario: 'Sabado às 14h', local: 'Sala 212', codigoTurma: 'T483', alunos: [], listaEspera: [] }, 
+  { nome: 'Algebra', vagas: 3, creditos: 4, professor: 'Furia', horario: 'Segunda às 10h', local: 'Laboratório 54', codigoTurma: 'T709', alunos: [], listaEspera: [] },
+  { nome: 'Etica', vagas: 2, creditos: 4, professor: 'Andreza', horario: 'Terça às 14h', local: 'Laboratório 123', codigoTurma: 'T772', alunos: [], listaEspera: [] },
   // Adicione mais disciplinas conforme necessário
 ];
 
@@ -35,11 +23,10 @@ function encontrarDisciplinaPorNome(nome) {
 }
 
 function imprimirInformacoesDisciplina(disciplina) {
-  const informacoes = gerarInformacoesDisciplina();
-  console.log(`Nome do Professor: ${informacoes.professor}`);
-  console.log(`Horario: ${informacoes.horario}`);
-  console.log(`Local da Aula: ${informacoes.local}`);
-  console.log(`Código da Turma: ${informacoes.codigoTurma}`);
+  console.log(`Nome do Professor: ${disciplina.professor}`);
+  console.log(`Horario: ${disciplina.horario}`);
+  console.log(`Local da Aula: ${disciplina.local}`);
+  console.log(`Código da Turma: ${disciplina.codigoTurma}`);
 }
 
 function main() {
@@ -66,40 +53,75 @@ function main() {
         const disciplina = encontrarDisciplinaPorNome(disciplinaEscolhida);
 
         if (disciplina) {
-          if (disciplina.vagas > 0 && alunoExistente.creditos >= disciplina.creditos) {
-            const conflitoHorario = alunoExistente.disciplinasInscritas.some(
-              (disc) => gerarInformacoesDisciplina().horario === disc.horario
-            );
+          if (disciplina.vagas > 0) {
+            if (alunoExistente.creditos >= disciplina.creditos) {
+              const conflitoHorario = alunoExistente.disciplinasInscritas.some(
+                (disc) => disciplina.horario === disc.horario
+              );
 
-            if (!conflitoHorario) {
-              alunoExistente.creditos -= disciplina.creditos;
-              disciplina.vagas--;
-              alunoExistente.disciplinasInscritas.push({
-                nome: disciplina.nome,
-                horario: gerarInformacoesDisciplina().horario,
-              });
-              console.log('Inscricao finalizada e dados registrados com sucesso no Sistema de Faturamento.');
-              imprimirInformacoesDisciplina(disciplina);            
+              if (!conflitoHorario) {
+                alunoExistente.creditos -= disciplina.creditos;
+                disciplina.vagas--;
+                alunoExistente.disciplinasInscritas.push({
+                  nome: disciplina.nome,
+                  horario: disciplina.horario,
+                });
+                console.log('Inscricao finalizada e dados registrados com sucesso no Sistema de Faturamento.');
+                imprimirInformacoesDisciplina(disciplina);
+              } else {
+                console.log('Conflito de horario! Nao e possivel se inscrever.');
+              }
             } else {
-              console.log('Conflito de horario! Nao e possivel se inscrever.');
+              console.log('Creditos insuficientes para se inscrever.');
             }
           } else {
-            console.log('Vagas esgotadas ou creditos insuficientes para se inscrever.');
+            console.log('Vagas esgotadas. Deseja entrar na lista de espera? (Sim/Nao)');
+            const respostaListaEspera = readlineSync.question();
+            if (respostaListaEspera.toLowerCase() === 'sim') {
+              disciplina.listaEspera.push(alunoExistente);
+              console.log('Adicionado a lista de espera.');
+              console.log('Lista de espera:');
+              disciplina.listaEspera.forEach((aluno, index) => {
+                console.log(`${index + 1}. ${aluno.nome}`);
+              });
+            } else {
+              console.log('Inscricao nao realizada.');
+            }
           }
         } else {
           console.log('Disciplina nao encontrada.');
         }
         break;
         case '2':
-          // Revisar lista de disciplinas inscritas
           const nomeAlunoRevisao = readlineSync.question('Digite seu nome: ');
-          const alunoRevisao = encontrarAlunoPorNome(nomeAlunoRevisao);
+          const alunoParaRevisar = encontrarAlunoPorNome(nomeAlunoRevisao);
   
-          if (alunoRevisao) {
+          if (alunoParaRevisar) {
             console.log('Disciplinas inscritas:');
-            alunoRevisao.disciplinasInscritas.forEach((disciplina) => {
-              console.log(`- ${disciplina.nome} (${disciplina.horario})`);
+            alunoParaRevisar.disciplinasInscritas.forEach((disc) => {
+              console.log(`${disc.nome} - ${disc.horario}`);
             });
+  
+            console.log('\nDeseja editar a lista de disciplinas inscritas? (Sim/Nao)');
+            const respostaEdicao = readlineSync.question();
+  
+            if (respostaEdicao.toLowerCase() === 'sim') {
+              // Opção de editar a lista de disciplinas inscritas
+              console.log('\nEditando a lista de disciplinas inscritas:');
+              alunoParaRevisar.disciplinasInscritas.forEach((disc, index) => {
+                console.log(`${index + 1}. ${disc.nome} - ${disc.horario}`);
+              });
+  
+              const numeroDisciplinaEdicao = parseInt(readlineSync.question('Digite o numero da disciplina que deseja remover: '), 10);
+  
+              if (!isNaN(numeroDisciplinaEdicao) && numeroDisciplinaEdicao >= 1 && numeroDisciplinaEdicao <= alunoParaRevisar.disciplinasInscritas.length) {
+                // Remover a disciplina selecionada
+                const disciplinaRemovida = alunoParaRevisar.disciplinasInscritas.splice(numeroDisciplinaEdicao - 1, 1)[0];
+                console.log(`Disciplina ${disciplinaRemovida.nome} removida com sucesso.`);
+              } else {
+                console.log('Entrada invalida. Nenhuma disciplina foi removida.');
+              }
+            }
           } else {
             console.log('Aluno nao encontrado.');
           }
@@ -107,7 +129,7 @@ function main() {
   
         case '3':
           // Confirmar Inscrições
-          console.log('Informações das disciplinas inscritas:');
+          console.log('Informacoes das disciplinas inscritas:');
           alunos.forEach((aluno) => {
             aluno.disciplinasInscritas.forEach((disciplina) => {
               const disciplinaConfirmacao = encontrarDisciplinaPorNome(disciplina.nome);

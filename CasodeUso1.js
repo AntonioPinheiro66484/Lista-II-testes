@@ -1,6 +1,18 @@
 //Codigo desenvolvido por Antonio Gabriel Pinheiro Lima.
 //Testado Por Igor Machado e Vinicius Guido.
 
+//Finalidade:
+
+//Este código foi desenvolvido com intuito de simular o caso de uso 1 Realizar inscrição. 
+
+//Comandos para instalar:
+
+//Instalar dependencias 
+//npm i
+
+//Startar o Sistema de realizar inscrição
+//node CasodeUso1.js
+
 //Instruções:
 
 // 1- Menu para escolha das opções dentro do processo de Realizar Inscrições. 

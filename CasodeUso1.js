@@ -1,3 +1,24 @@
+//Codigo desenvolvido por Antonio Gabriel Pinheiro Lima.
+//Testado Por Igor Machado e Vinicius Guido.
+
+//Instruções:
+
+// 1- Menu para escolha das opções dentro do processo de Realizar Inscrições. 
+// 2- Para inscrever na disciplina é necessario apertar 1 digitar o nome do aluno e o nome da disciplina.
+// 3- Para revisar a lista basta digitar o nome do aluno e caso queira editar responda Sim ou Nao.
+// 4- Para excluir uma disciplinar apos apertar em Sim digite o numero correspondente a disciplina e remova ela.
+// 5- Para confirmar as inscrições basta Apertar 3 
+// 6- Caso queira sair aperte 4 e o sistema será encerrado 
+
+// Regras:
+
+// Cada Aluno tem 20 creditos e cada disciplina custa 4 creditos para o aluno ter uma grade completa na semana basta escolher
+// 5 disciplinas, aluno não pode escolher turma onde tem conflito de horario (Outra turma no mesmo horario e dia) e não pode tambem
+// ultrapassar a quantidade de creditos que pode ser gasta caso isso acontecessa deve voltar e revisar suas materias.
+
+// Se a disciplina estiver com todas as vagas preenchidas o aluno pode entrar em uma lista de espera ou voltar e editar sua grade
+
+
 const readlineSync = require('readline-sync');
 
 const disciplinasDisponiveis = [

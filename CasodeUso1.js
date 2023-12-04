@@ -9,7 +9,6 @@ const disciplinasDisponiveis = [
   { nome: 'Design', vagas: 3, creditos: 4, professor: 'Ivo', horario: 'Sabado às 14h', local: 'Sala 212', codigoTurma: 'T483', alunos: [], listaEspera: [] }, 
   { nome: 'Algebra', vagas: 3, creditos: 4, professor: 'Furia', horario: 'Segunda às 10h', local: 'Laboratório 54', codigoTurma: 'T709', alunos: [], listaEspera: [] },
   { nome: 'Etica', vagas: 2, creditos: 4, professor: 'Andreza', horario: 'Terça às 14h', local: 'Laboratório 123', codigoTurma: 'T772', alunos: [], listaEspera: [] },
-  // Adicione mais disciplinas conforme necessário
 ];
 
 const alunos = [];
@@ -46,7 +45,7 @@ function main() {
         if (!alunoExistente) {
           const novoAluno = { nome: nomeAluno, creditos: 20, disciplinasInscritas: [] };
           alunos.push(novoAluno);
-          alunoExistente = novoAluno; // Atualizar referência
+          alunoExistente = novoAluno; 
         }
 
         const disciplinaEscolhida = readlineSync.question('Digite o nome da disciplina desejada: ');
